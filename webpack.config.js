@@ -11,7 +11,7 @@ module.exports = (_, argv) => ({
     publicPath:
       argv.mode === 'development'
         ? `http://localhost:${PORT}/`
-        : 'https://main-ui-lovat.vercel.app//',
+        : 'https://main-ui-lovat.vercel.app/',
   },
 
   resolve: {
