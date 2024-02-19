@@ -2,11 +2,15 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const Dotenv = require('dotenv-webpack');
 const deps = require('./package.json').dependencies;
+
+const PORT = 3000;
+const COMPONENT_LIBRARY_PORT = 3001;
+
 module.exports = (_, argv) => ({
   output: {
     publicPath:
       argv.mode === 'development'
-        ? 'http://localhost:3001/'
+        ? `http://localhost:${PORT}/`
         : 'https://second-app-pi.vercel.app/',
   },
 
@@ -15,7 +19,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3000,
+    port: PORT,
     historyApiFallback: true,
   },
 
@@ -46,7 +50,12 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: 'MainUI',
       filename: 'remoteEntry.js',
-      remotes: {},
+      remotes: {
+        ComponentLibrary:
+          argv.mode === 'development'
+            ? `ComponentLibrary@http://localhost:${COMPONENT_LIBRARY_PORT}/remoteEntry.js`
+            : 'ComponentLibrary@https://component-library-lake.vercel.app/remoteEntry.js',
+      },
       exposes: {},
       shared: {
         ...deps,
@@ -58,6 +67,12 @@ module.exports = (_, argv) => ({
           singleton: true,
           requiredVersion: deps['react-dom'],
         },
+        '@mui/material': { singleton: true },
+        '@mui/system': { singleton: true },
+        '@mui/lab': { singleton: true },
+        '@mui/icons-material': { singleton: true },
+        '@mui/x-data-grid-generator': { singleton: true },
+        '@mui/x-data-grid-pro': { singleton: true },
       },
     }),
     new HtmlWebPackPlugin({
