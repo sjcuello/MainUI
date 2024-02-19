@@ -6,7 +6,7 @@ const deps = require('./package.json').dependencies;
 const PORT = 3000;
 const COMPONENT_LIBRARY_PORT = 3001;
 
-module.exports = (_, argv) => ({
+module.exports = (env, argv) => ({
   output: {
     publicPath:
       argv.mode === 'development'
@@ -52,9 +52,9 @@ module.exports = (_, argv) => ({
       filename: 'remoteEntry.js',
       remotes: {
         ComponentLibrary:
-          argv.mode === 'development'
+          argv.mode === 'development' && !env.local
             ? `ComponentLibrary@http://localhost:${COMPONENT_LIBRARY_PORT}/remoteEntry.js`
-            : 'ComponentLibrary@https://component-library-lake.vercel.app/remoteEntry.js',
+            : `ComponentLibrary@https://component-library-lake.vercel.app/remoteEntry.js`,
       },
       exposes: {},
       shared: {
