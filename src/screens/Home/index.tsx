@@ -4,9 +4,12 @@ import DataGrid from 'ComponentLibrary/DataGrid';
 import TableMUI from 'ComponentLibrary/Table';
 import TabsMUI from 'ComponentLibrary/Tab';
 import { useAppDispatch, useAppSelector } from '../../../redux';
-import { selectData } from '../../../redux/user';
+import { selectData, selectToken, setToken } from '../../../redux/user';
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+  const token = useAppSelector(selectToken);
+
   const tabArray: any[] = [
     {
       title: '🎹 Buttons',
@@ -16,7 +19,7 @@ const Home = () => {
             <Button
               sx={{ margin: '1rem' }}
               variant="text"
-              onClick={() => console.log('ejemplo')}>
+              onClick={() => dispatch(setToken('1234567890'))}>
               Primary
             </Button>
             <Button sx={{ margin: '1rem' }} variant="contained">
@@ -36,7 +39,8 @@ const Home = () => {
             <Button
               sx={{ margin: '1rem' }}
               variant="contained"
-              color="secondary">
+              color="secondary"
+              onClick={() => console.log('token', token)}>
               Secondary
             </Button>
             <Button
@@ -68,9 +72,7 @@ const Home = () => {
     { title: '📦 Simple Table', children: <TableMUI /> },
     { title: '⚡️ Data Grid', children: <DataGrid /> },
   ];
-  const dispatch = useAppDispatch();
-  const data = useAppSelector(selectData);
-  console.log('data', data);
+
   return (
     <div className="container">
       <TabsMUI tabArray={tabArray} />
