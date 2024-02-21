@@ -1,16 +1,18 @@
 import React from 'react';
-import { Button, Grid } from 'ComponentLibrary/MUI';
 import DataGrid from 'ComponentLibrary/DataGrid';
 import TableMUI from 'ComponentLibrary/Table';
 import TabsMUI from 'ComponentLibrary/Tab';
 import { useAppDispatch, useAppSelector } from '../../../redux';
-import { selectData, selectToken, setToken } from '../../../redux/user';
+import { selectToken, setToken } from '../../../redux/user';
+
+import { TabContent } from 'ComponentLibrary/src/interfaces';
+import { Button, Grid } from 'ComponentLibrary/src/components/MUI';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
 
-  const tabArray: any[] = [
+  const tabArray: TabContent[] = [
     {
       title: '🎹 Buttons',
       children: (
