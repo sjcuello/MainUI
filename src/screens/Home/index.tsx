@@ -5,14 +5,14 @@ import TabsMUI from 'ComponentLibrary/Tab';
 import { useAppDispatch, useAppSelector } from '../../../redux';
 import { selectToken, setToken } from '../../../redux/user';
 
-import { TabContent } from 'ComponentLibrary/src/interfaces';
-import { Button, Grid } from 'ComponentLibrary/src/components/MUI';
+import { TabContent } from 'ComponentLibrary/Interfaces';
+import { Button, Grid } from 'ComponentLibrary/MUI';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
 
-  const tabArray: TabContent[] = [
+  const tabArray: any[] = [
     {
       title: '🎹 Buttons',
       children: (
