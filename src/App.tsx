@@ -1,27 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import './App.css';
 
-import ThemeContainer from 'ComponentLibrary/ThemeContainer';
-// import 'ComponentLibrary/src/declarations.js';
-import './remote_componets.d.ts';
-import './index.css';
-import { Provider } from 'react-redux';
-import store from '../redux';
-import { Home } from './screens';
-
-const App = () => {
+function App() {
   return (
-    <Provider store={store}>
-      <ThemeContainer>
-        <Home />
-      </ThemeContainer>
-    </Provider>
+    <div className="App">
+      <header className="App-header">
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
-};
+}
 
-const rootElement = document.getElementById('app');
-if (!rootElement) throw new Error('Failed to find the root element');
-
-const root = ReactDOM.createRoot(rootElement as HTMLElement);
-
-root.render(<App />);
+export default App;
