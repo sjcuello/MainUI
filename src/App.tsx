@@ -1,24 +1,20 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+import { Provider } from 'react-redux';
+import store from './redux';
+import { Home } from './screens';
+import '@workspaceui/componentlibrary/src/declarations.d.ts';
+import ThemeContainer from '@workspaceui/componentlibrary/src/components/ThemeContainer';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ThemeContainer>
+        <Home />
+      </ThemeContainer>
+    </Provider>
   );
-}
+};
 
 export default App;
