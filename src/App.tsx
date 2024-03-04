@@ -3,11 +3,16 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import { ThemeContainer } from '@workspaceui/componentlibrary';
+import NewComponent from '@workspaceui/componentlibrary/src/new';
+import { useEffect } from 'react';
 function App() {
   const [count, setCount] = useState(0);
-  ThemeContainer('jsjs');
+  useEffect(() => {
+    ThemeContainer('jsjs');
+  }, []);
   return (
     <>
+      <NewComponent name="santi" />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
